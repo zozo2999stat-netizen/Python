@@ -1,1 +1,102 @@
+# 1. Raqamni nolga bo'lishda ZeroDivisionError istisnosini hal qilish uchun Python dasturini yozing.
+a = int(input("a ga qiynat kiriting:"))
+for i in range(1,10):
+    if a > 10:
+        print(f"{i} ga bo'lgandagi qoldiq: {a%i}")
+    elif 1 < a <= 10:
+        if i <= a:
+            print(f"{i} ga bo'lgandagi qoldiq: {a%i}")
+        elif i > a:
+            break
+
+# 2. Foydalanuvchini butun sonni kiritishni taklif qiladigan va agar kiritilgan butun son bo'lmasa, ValueError istisnosini ko'taradigan Python dasturini yozingn 
+try:
+    n = int(input("n ni kiriting:"))
+    if type(n) == int:
+        print("Butun son")
+    else:
+        print("Butun emas")
+except:
+    print("Siz ValueError bilan xato qildingiz!")
+
+# 3. Faylni ochadigan va fayl mavjud bo'lmasa FileNotFoundError istisnosini boshqaradigan Python dasturini yozing.
+try:
+    with open("test.txt", 'r') as f:
+        print("Fayl topildi")
+except:
+    print("Siz FileNoteFaundError xatoligiga yo'l qo'ydingiz!")
+
+# 4. Foydalanuvchiga ikkita raqam kiritishni taklif qiladigan va agar kirishlar sonli bo'lmasa, TypeError istisnosini ko'rsatadigan Python dasturini yozing.
+try:
+    n = int(input("n ni kiriting:"))
+    m = int(input("m ni kiriting:"))
+    print("Siz son kiritdingiz")
+except:
+    print("Siz ValueError bilan xato qildingiz!")
+
+# 5. Ro'yxatda amalni bajaradigan va indeks diapazondan tashqarida bo'lsa, IndexError istisnosini boshqaradigan Python dasturini yozing.
+try:
+    indeks = int(input("Sizga kerakli element indeksini kiriting!"))
+    ls = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    print(f"{indeks}-element: {ls[indeks]}")
+except:
+    print(f"Ro'yxatda {len(ls)} ta element bor siz kiritgan indeks bo'yicha element topilmadi")
+
+# 6. Foydalanuvchiga raqam kiritishni taklif qiladigan va agar foydalanuvchi kiritishni bekor qilsa, 
+# KeyboardInterrupt istisnosini boshqaradigan Python dasturini yozing.
+try:
+    x = input("n ga butun qiymat kiriting: ")
+
+    if x == "":
+        print("Siz hech narsa kiritmadingiz!")
+    else:
+        n = int(x)
+        print("Siz kiritgan son:", n)
+
+except ValueError:
+    print("Iltimos, faqat butun son kiriting!")
+
+except KeyboardInterrupt:
+    print("\nSiz ma'lumot kiritishdan bosh tortdingiz (Ctrl+C bosildi).")
+
+# 7. Agar arifmetik xato bo'lsa, bo'linishni bajaradigan va ArithmeticError istisnosini boshqaradigan Python dasturini yozing.
+try:
+    a = 100
+    for i in range(11):
+        s = a // i
+        print(s)
+except ArithmeticError:
+    print("Siz 0 ga bo'lishga urindingiz bu xato !!!")
+
+8. Agar kodlash muammosi bo'lsa, faylni ochadigan va UnicodeDecodeError istisnosini boshqaradigan Python dasturini yozing.
+try:
+    # UTF-8 kodlash bilan ochishga urinib ko'ramiz
+    with open("namuna.txt", "r") as f:
+        data = f.read()
+    print("Fayl muvaffaqiyatli o‘qildi!")
+
+except UnicodeDecodeError:
+    print("Xatolik: Faylni UTF-8 kodlashda o‘qib bo‘lmadi.")
+    print("Boshqa encoding bilan ochishga urinib ko‘raylik...")
+    # Yana bir variant sifatida latin1 kodlash bilan ochish
+    with open("namuna.txt", "r", encoding="latin-1") as f:
+        data = f.read()
+    print("Fayl latin-1 kodlash bilan o‘qildi!")
+
+except FileNotFoundError:
+    print("Xatolik: Fayl topilmadi!")
+
+# 9. Ro'yxat amalini bajaradigan va atribut mavjud bo'lmasa, AttributeError istisnosini boshqaradigan Python dasturini yozing.
+sonlar = [1, 2, 3]
+def royxat_amali(royxat, metod, *args):
+    try:
+        # getattr - atributni olish uchun ishlatiladi
+        funksiya = getattr(royxat, metod)
+        natija = funksiya(*args)  # metodni chaqiramiz
+        print(f"✅ '{metod}' metodi bajarildi.")
+        return royxat if natija is None else natija
+
+    except AttributeError:
+        print(f"❌ Xatolik: '{metod}' nomli atribut yoki metod ro‘yxatda mavjud emas!")
+        return None
 
